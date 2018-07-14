@@ -28,7 +28,7 @@ let undeliveredPackages = [
 
 function makeGraph(nodes) {
     let nodeMap = new Map();
-    nodes.map( node => { node.forEach( place => {
+    nodes.forEach( node => { node.forEach( place => {
                     if (!(place in nodeMap)) {
                         nodeMap[place] = node.filter( p => p !== place );
                     } else {
