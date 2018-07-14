@@ -2,7 +2,7 @@
 Delivery Bot
 */
 
-let nodes = [
+let edges = [
     ["Chris", "Julie"],
     ["Chris", "Phil"],
     ["Julie", "Sam"],
@@ -26,19 +26,19 @@ let undeliveredPackages = [
     { location: "Alex", destination: "John" }
 ];
 
-function makeGraph(nodes) {
-    let nodeMap = new Map();
-    nodes.forEach( node => { node.forEach( place => {
-                    if (!(place in nodeMap)) {
-                        nodeMap[place] = node.filter( p => p !== place );
+function makeGraph() {
+    let graph = new Map();
+    edges.forEach( edge => { edge.forEach( node => {
+                    if (!(node in graph)) {
+                        graph[node] = edge.filter( p => p !== node );
                     } else {
-                        nodeMap[place].push(
-                            String(node.filter(p => p !== place && !(p in nodeMap[place])))
+                        graph[node].push(
+                            edge.filter(p => p !== node && !(p in graph[node])).toString()
                         );
                     }
                 });}
     );
-    return nodeMap;
+    return graph;
 }
 
 class DeliveryBot {
@@ -73,7 +73,7 @@ class DeliveryBot {
 }
 
 let deliverAll = function(print=true) {
-    let map = makeGraph(nodes);
+    let map = makeGraph(edges);
     let currentState = new DeliveryBot(map, undeliveredPackages, botLocation);
     let iterations = 1;
 
