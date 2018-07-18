@@ -1,5 +1,6 @@
 /*
 Delivery Bot
+Random routes
 */
 
 let edges = [
@@ -120,5 +121,5 @@ let runTrials = function (numTrials=50) {
             `
     );
 };
-
+deliverAll();
 runTrials(50);
